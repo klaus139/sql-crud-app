@@ -2,7 +2,7 @@ import express from "express";
 
 const app = express();
 
-const port = 5005
+const port = 5005;
 
 app.get("/test", (req, res)=>{
     return {
