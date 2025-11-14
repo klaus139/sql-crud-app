@@ -1,14 +1,19 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
-const port = 5005;
+const port = process.env.PORT;
+
+app.use(express.json())
+
 
 app.get("/test", (req, res)=>{
-    return {
+    res.status(200).json({
         success:true,
-        message:"app is running well"
-    }
+        message:"APP is running healthy"
+    })
 })
 
 

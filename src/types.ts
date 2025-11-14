@@ -18,8 +18,17 @@ export enum Genre {
 export interface Book {
     title: string;
     author: string;
-    isbn: ISBN;
-    price: Price;
+    isbn: string;
+    price: string;
     genre: Genre;
     publishedYear: number;
-  }
+}
+
+const myBook:Book = {
+    title:"the world world",
+    author:"myh name",
+    isbn:"1223223",
+    price:"5000",
+    genre:Genre.Fiction,
+    publishedYear:1992
+}
