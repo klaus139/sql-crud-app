@@ -12,8 +12,8 @@ app.get("/test", (req, res)=>{
     return {
         success:true,
         message:"app is running well"
-    }
-})
+    };
+});
 
 
 app.listen(port, ()=> {
