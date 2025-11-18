@@ -10,7 +10,7 @@ const port = process.env.PORT;
 app.use(express.json())
 
 //uncomment this to connect to the database
-//connectToDatabase();
+connectToDatabase();
 
 
 app.get("/test", (req, res)=>{
