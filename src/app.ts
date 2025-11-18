@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import connectToDatabase from "./database/db";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.json())
 //uncomment this to connect to the database
 connectToDatabase();
 
-
+app.use("/api/auth", authRoutes);
 app.get("/test", (req, res)=>{
     res.status(200).json({
         success:true,
