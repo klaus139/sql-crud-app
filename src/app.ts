@@ -2,13 +2,18 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import connectDB from "./database/db.js";
 
+dotenv.config();
 
 const app = express();
 
-const port = 5005;
+const port = process.env.PORT || 3000;
 
-app.get("/test", (req, res)=>{
+connectDB();
+
+// Route
+app.get("/api/v1/test", (req, res)=>{
     return {
         success:true,
         message:"app is running well"
@@ -18,4 +23,6 @@ app.get("/test", (req, res)=>{
 
 app.listen(port, ()=> {
     console.log(`server is running on port ${port}`)
-})
+});
+
+export default app;
