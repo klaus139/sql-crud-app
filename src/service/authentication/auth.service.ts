@@ -1,7 +1,12 @@
 //create a class that implements the AuthService interface
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../../models/user.model";
 import { UserRepository } from "../../repository/user.repository";
 import { IAuthService, CreateUserDTO } from "./auth.interface";
+import dotenv from "dotenv"; 
+
+dotenv.config(); 
 
 
 export class AuthenticationService implements IAuthService {
@@ -39,16 +44,30 @@ export class AuthenticationService implements IAuthService {
             password:hashedPassword
         });
 
-        return newUser;
+        return await newUser.save();
 
-      }catch(error){
+      } catch(error) {
         console.log(`Error creating user: ${error}`);
         throw error;
       }
 
-        
     }
 
-    
-   
-}
+    async login(email: string, password: string): Promise<string> {
+        const user = await User.findOne({ email }); 
+        if (!user) throw new Error("Invalid email or password");
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) throw new Error("Invalid email or password");
+
+        // Generate JWT
+        const token = jwt.sign(
+          { id: user._id, email: user.email },
+          process.env.JWT_SECRET as string,
+          { expiresIn: '1h' }
+        );
+        return token;
+    }
+
+
+};

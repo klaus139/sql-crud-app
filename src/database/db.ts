@@ -2,11 +2,11 @@
 //first install mongoose ny running npm i mongoose on your terminal
 import mongoose from "mongoose"
 import dotenv from "dotenv";
+
+
 dotenv.config();
 
-
-const dbUrl= process.env.DB_URL!;
-
+const dbUrl= process.env.DB_URL;
 
 const connectToDatabase = async () => {
     try {
@@ -14,6 +14,7 @@ const connectToDatabase = async () => {
         console.log("Connected to the db");
     } catch (err) {
         console.error("Failed to connect to the db", err);
+        process.exit(1);
     }
 };
 

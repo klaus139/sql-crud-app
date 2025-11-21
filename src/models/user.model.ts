@@ -1,6 +1,5 @@
-import mongoose, { Schema } from "mongoose";
-
-
+import mongoose, { Schema, Document } from "mongoose";
+import { IUser } from "../Interfaces/IUser";
 
 const userSchema = new Schema({
     firstName:{
@@ -17,17 +16,18 @@ const userSchema = new Schema({
         unique:true
     },
     phone:{
-        type:String,
+        type: String,
     },
     address:{
-        type:String
+        type: String
     },
     password:{
-        type:String
+        type: String,
+        required: true
     },
     isVerified:{
         type:Boolean,
-        default:false
+        default: false
     },
     token:{
         type:String
@@ -36,6 +36,6 @@ const userSchema = new Schema({
 },{timestamps:true})
 
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
 export default User;

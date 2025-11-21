@@ -6,14 +6,15 @@ import authRoutes from "./routes/auth.route";
 
 const app = express();
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.use(express.json())
+app.use(express.json());
 
 //uncomment this to connect to the database
 connectToDatabase();
 
 app.use("/api/auth", authRoutes);
+
 app.get("/test", (req, res)=>{
     res.status(200).json({
         success:true,
